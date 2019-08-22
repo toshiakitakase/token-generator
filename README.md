@@ -1,4 +1,6 @@
 # token-generator
+ERC20をサポートしたトークンを発行できます。
+使用する場合にはMetamaskが必要です。
 
 ## Project setup
 ```
