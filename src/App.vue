@@ -61,10 +61,8 @@
     </div>
   </div>
 </template>
-<script>
-import Web3 from 'web3'
-import TokenGenerator from "../ethereum/build/contracts/TokenGenerator.json"
 
+<script>
 export default {
   name: 'app',
   data: () => ({
@@ -97,39 +95,6 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
-      console.log({
-        tokenName: this.form.tokenName,
-        tokenSymbol: this.form.tokenSymbol,
-        dicimals: this.form.dicimals,
-        totalSupply: this.form.totalSupply,
-        bytecode: TokenGenerator.bytecode,
-        abi: TokenGenerator.abi,
-        address: web3.currentProvider.selectedAddress
-      })
-      let contract = new web3.eth.Contract(TokenGenerator.abi)
-      contract.deploy({
-          data: TokenGenerator.bytecode,
-          arguments: [
-            this.form.tokenName,
-            this.form.tokenSymbol,
-            this.form.dicimals,
-            this.form.totalSupply
-          ]
-      })
-      .send({
-          from: web3.currentProvider.selectedAddress,
-          gas:  2000000,
-          gasPrice: 20000000000,
-      })
-      .on('error', (error) => {
-          console.log(error)
-      })
-      .on('transactionHash', (transactionHash) => {
-          console.log(transactionHash)
-      })
-      .on('receipt', async (receipt) => {
-          console.log(receipt.contractAddress)
-      })
     },
     onReset(evt) {
       evt.preventDefault()
@@ -151,7 +116,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
