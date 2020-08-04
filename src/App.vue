@@ -84,6 +84,7 @@ export default {
       try {
         await ethereum.enable();
       } catch (error) {
+        console.log(error)
       }
     }
     else if (web3) {
